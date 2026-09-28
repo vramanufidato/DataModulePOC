@@ -1,0 +1,39 @@
+# ─── AWS Dev Environment ─────────────────────────────
+region      = "us-east-1"
+environment = "dev"
+prefix      = "poc-dev"
+
+# Storage
+bronze_bucket = "poc-dev-bronze"
+silver_bucket = "poc-dev-silver"
+gold_bucket   = "poc-dev-gold"
+bronze_retention_days = 30
+
+# Glue
+glue_version    = "4.0"
+glue_worker_type = "G.1X"
+glue_num_workers = 2
+
+# Redshift
+redshift_node_type   = "ra3.4xlarge"
+redshift_node_count  = 1
+redshift_pause_enabled = true
+redshift_pause_minutes = 60
+
+# Kinesis
+kinesis_shard_count = 1
+
+# Lake Formation
+enable_lake_formation = true
+enable_lf_tags        = false
+
+# Networking
+use_private_subnets = false
+
+# Tags
+tags = {
+  Environment = "dev"
+  Owner       = "data-platform-team"
+  CostCenter  = "poc"
+  AutoTeardown = "true"
+}

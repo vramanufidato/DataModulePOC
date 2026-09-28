@@ -1,0 +1,43 @@
+# ─── Azure Dev Environment ───────────────────────────
+location    = "eastus"
+environment = "dev"
+suffix      = "dev001"
+
+# Resource Group
+resource_group_name = "poc-data-platform-dev"
+
+# Storage
+storage_account_name  = "pocdatalakedev001"
+bronze_filesystem     = "bronze"
+silver_filesystem     = "silver"
+gold_filesystem       = "gold"
+storage_replication   = "LRS"
+
+# Databricks
+databricks_workspace_name = "poc-dbx-dev"
+databricks_sku            = "premium"
+
+# Synapse
+synapse_workspace_name = "poc-synapse-dev"
+synapse_sql_pool_name  = "pocpool"
+synapse_sql_pool_size  = "DW100c"
+synapse_auto_pause_minutes = 60
+
+# Event Hubs
+eventhub_namespace  = "poc-eh-dev"
+eventhub_sku        = "Standard"
+eventhub_capacity   = 1
+
+# Purview
+purview_account_name = "poc-purview-dev"
+
+# Networking
+enable_private_endpoints = false
+
+# Tags
+tags = {
+  Environment  = "dev"
+  Owner        = "data-platform-team"
+  CostCenter   = "poc"
+  AutoTeardown = "true"
+}

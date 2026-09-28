@@ -1,0 +1,46 @@
+# ─── Databricks Prod Environment (on AWS) ────────────
+region      = "us-east-1"
+environment = "prod"
+prefix      = "poc-dbx-prod"
+
+# Unity Catalog
+metastore_name = "poc-metastore-prod"
+metastore_storage_root = "s3://poc-dbx-prod-metastore/"
+catalog_name   = "poc"
+schemas        = ["bronze", "silver", "gold", "security"]
+
+# Cluster
+cluster_name        = "poc-prod-cluster"
+cluster_node_type   = "i3.2xlarge"
+cluster_min_workers = 2
+cluster_max_workers = 20
+cluster_auto_terminate_minutes = 5
+cluster_photon_enabled = true
+cluster_spot_policy   = "COST_OPTIMIZED"
+
+# SQL Warehouse
+sql_warehouse_name    = "poc-prod-warehouse"
+sql_warehouse_size    = "Medium"
+sql_warehouse_auto_stop_minutes = 5
+sql_warehouse_serverless = true
+
+# DLT
+dlt_pipeline_name = "poc-dlt-prod"
+dlt_continuous    = true
+dlt_development   = false
+
+# Delta Sharing
+enable_delta_sharing = true
+share_name = "partner_share"
+
+# Governance
+enable_row_filters = true
+enable_column_masks = true
+
+# Tags
+tags = {
+  Environment = "prod"
+  Owner       = "data-platform-team"
+  CostCenter  = "analytics"
+  Compliance  = "soc2"
+}

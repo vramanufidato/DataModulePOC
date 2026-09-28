@@ -1,0 +1,45 @@
+# ─── AWS Prod Environment ────────────────────────────
+region      = "us-east-1"
+environment = "prod"
+prefix      = "poc-prod"
+
+# Storage
+bronze_bucket = "poc-prod-bronze"
+silver_bucket = "poc-prod-silver"
+gold_bucket   = "poc-prod-gold"
+bronze_retention_days = 365
+
+# Glue
+glue_version    = "4.0"
+glue_worker_type = "G.2X"
+glue_num_workers = 10
+
+# Redshift
+redshift_node_type   = "ra3.4xlarge"
+redshift_node_count  = 2
+redshift_pause_enabled = false
+redshift_multi_az    = true
+
+# Kinesis
+kinesis_shard_count = 4
+kinesis_mode        = "PROVISIONED"
+
+# Lake Formation
+enable_lake_formation = true
+enable_lf_tags        = true
+
+# Networking
+use_private_subnets = true
+vpc_id = "vpc-xxxxxxxxxxxxxxxxx"
+
+# Security
+enable_kms         = true
+kms_key_alias      = "alias/poc-prod-data"
+
+tags = {
+  Environment = "prod"
+  Owner       = "data-platform-team"
+  CostCenter  = "analytics"
+  Compliance  = "soc2"
+  Backup      = "daily"
+}

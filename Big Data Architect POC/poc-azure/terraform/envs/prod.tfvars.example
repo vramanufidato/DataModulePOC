@@ -1,0 +1,49 @@
+# ─── Azure Prod Environment ──────────────────────────
+location    = "eastus"
+environment = "prod"
+suffix      = "prod001"
+
+# Resource Group
+resource_group_name = "poc-data-platform-prod"
+
+# Storage
+storage_account_name  = "pocdatalakeprod001"
+bronze_filesystem     = "bronze"
+silver_filesystem     = "silver"
+gold_filesystem       = "gold"
+storage_replication   = "ZRS"
+
+# Databricks
+databricks_workspace_name = "poc-dbx-prod"
+databricks_sku            = "premium"
+
+# Synapse
+synapse_workspace_name = "poc-synapse-prod"
+synapse_sql_pool_name  = "pocpool"
+synapse_sql_pool_size  = "DW500c"
+synapse_auto_pause_minutes = 15
+
+# Event Hubs
+eventhub_namespace  = "poc-eh-prod"
+eventhub_sku        = "Premium"
+eventhub_capacity   = 4
+
+# Purview
+purview_account_name = "poc-purview-prod"
+
+# Networking
+enable_private_endpoints = true
+vnet_name = "poc-vnet-prod"
+subnet_name = "poc-subnet-data"
+
+# Security
+enable_customer_managed_keys = true
+key_vault_name = "poc-kv-prod"
+
+tags = {
+  Environment = "prod"
+  Owner       = "data-platform-team"
+  CostCenter  = "analytics"
+  Compliance  = "soc2"
+  Backup      = "daily"
+}

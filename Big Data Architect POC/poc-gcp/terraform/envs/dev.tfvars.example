@@ -1,0 +1,35 @@
+# ─── GCP Dev Environment ─────────────────────────────
+project_id  = "poc-data-platform-dev"
+region      = "us-central1"
+zone        = "us-central1-a"
+environment = "dev"
+
+# Storage
+bronze_bucket_name = "poc-data-platform-dev-bronze"
+temp_bucket_name   = "poc-data-platform-dev-temp"
+bronze_retention_days = 30
+
+# Compute
+dataproc_worker_count    = 2
+dataproc_machine_type    = "n1-standard-4"
+dataproc_max_idle_minutes = 15
+
+# BigQuery
+bq_silver_dataset = "silver"
+bq_gold_dataset   = "gold"
+bq_location       = "US"
+
+# Networking
+enable_private_endpoints = false
+
+# Governance
+enable_dataplex   = true
+enable_policy_tags = false
+
+# Labels
+labels = {
+  environment = "dev"
+  owner       = "data-platform-team"
+  cost_center = "poc"
+  auto_teardown = "true"
+}

@@ -1,0 +1,39 @@
+# ─── Databricks Dev Environment (on AWS) ─────────────
+region      = "us-east-1"
+environment = "dev"
+prefix      = "poc-dbx-dev"
+
+# Unity Catalog
+metastore_name = "poc-metastore-dev"
+metastore_storage_root = "s3://poc-dbx-dev-metastore/"
+catalog_name   = "poc_dev"
+schemas        = ["bronze", "silver", "gold"]
+
+# Cluster
+cluster_name        = "poc-dev-cluster"
+cluster_node_type   = "i3.xlarge"
+cluster_min_workers = 1
+cluster_max_workers = 4
+cluster_auto_terminate_minutes = 20
+cluster_photon_enabled = true
+
+# SQL Warehouse
+sql_warehouse_name    = "poc-dev-warehouse"
+sql_warehouse_size    = "2X-Small"
+sql_warehouse_auto_stop_minutes = 10
+
+# DLT
+dlt_pipeline_name = "poc-dlt-dev"
+dlt_continuous    = false
+dlt_development   = true
+
+# Delta Sharing
+enable_delta_sharing = false
+
+# Tags
+tags = {
+  Environment  = "dev"
+  Owner        = "data-platform-team"
+  CostCenter   = "poc"
+  AutoTeardown = "true"
+}

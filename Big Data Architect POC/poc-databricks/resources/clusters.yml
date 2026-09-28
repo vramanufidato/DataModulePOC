@@ -1,0 +1,55 @@
+resources:
+  clusters:
+    dev_cluster:
+      cluster_name: poc-dev-cluster
+      spark_version: 15.4.x-scala2.12
+      node_type_id: i3.xlarge
+      num_workers: 0
+      autoscale:
+        min_workers: 1
+        max_workers: 4
+      autotermination_minutes: 20
+      spark_conf:
+        spark.databricks.cluster.profile: serverless
+        spark.microsoft.photon.enabled: "true"
+      custom_tags:
+        environment: dev
+        owner: data-platform-team
+
+    prod_cluster:
+      cluster_name: poc-prod-cluster
+      spark_version: 15.4.x-scala2.12
+      node_type_id: i3.2xlarge
+      autoscale:
+        min_workers: 2
+        max_workers: 20
+      autotermination_minutes: 5
+      spark_conf:
+        spark.microsoft.photon.enabled: "true"
+        spark.databricks.delta.optimizeWrite.enabled: "true"
+        spark.databricks.delta.autoCompact.enabled: "true"
+      custom_tags:
+        environment: prod
+        owner: data-platform-team
+
+  sql_warehouses:
+    dev_warehouse:
+      name: poc-dev-warehouse
+      cluster_size: 2X-Small
+      auto_stop_mins: 10
+      enable_serverless_compute: true
+      tags:
+        custom_tags:
+          - key: environment
+            value: dev
+
+    prod_warehouse:
+      name: poc-prod-warehouse
+      cluster_size: Medium
+      auto_stop_mins: 5
+      enable_serverless_compute: true
+      warehouse_type: PRO
+      tags:
+        custom_tags:
+          - key: environment
+            value: prod

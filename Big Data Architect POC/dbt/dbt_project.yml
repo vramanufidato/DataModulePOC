@@ -1,0 +1,38 @@
+name: 'poc_medallion'
+version: '1.0.0'
+config-version: 2
+
+profile: 'poc_medallion'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  poc_medallion:
+    staging:
+      +materialized: view
+      +schema: silver
+      +tags: ['silver']
+    marts:
+      +materialized: table
+      +schema: gold
+      +tags: ['gold']
+      +partition_by:
+        field: order_date
+        data_type: date
+      +cluster_by: ['region', 'category']
+    metrics:
+      +materialized: view
+      +schema: gold
+      +tags: ['metrics']
+
+vars:
+  # Override per-target if needed
+  lookback_days: 30
+  high_value_threshold: 1000

@@ -1,0 +1,64 @@
+# Databricks Asset Bundle — Multi-Cloud Data Platform POC
+# Docs: https://docs.databricks.com/dev-tools/bundles/
+
+bundle:
+  name: poc-lakehouse
+
+include:
+  - resources/*.yml
+  - pipelines/*.yml
+  - jobs/*.yml
+
+# ─── Variables ────────────────────────────────────────
+variables:
+  catalog:
+    description: Unity Catalog name
+    default: poc
+  bronze_schema:
+    default: bronze
+  silver_schema:
+    default: silver
+  gold_schema:
+    default: gold
+  landing_path:
+    description: Root path for landing files
+    default: /mnt/landing
+  alert_email:
+    default: data-alerts@company.com
+
+# ─── Targets ──────────────────────────────────────────
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://poc-dev.cloud.databricks.com
+    variables:
+      catalog: poc_dev
+      landing_path: /mnt/dev/landing
+    run_as:
+      service_principal_name: poc-dev-sp
+
+  staging:
+    mode: development
+    workspace:
+      host: https://poc-staging.cloud.databricks.com
+    variables:
+      catalog: poc_staging
+      landing_path: /mnt/staging/landing
+
+  prod:
+    mode: production
+    workspace:
+      host: https://poc.cloud.databricks.com
+      root_path: /Workspace/Users/data-platform@company.com/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      catalog: poc
+      landing_path: /mnt/prod/landing
+    run_as:
+      service_principal_name: poc-prod-sp
+    permissions:
+      - user_name: data-platform@company.com
+        level: CAN_MANAGE
+      - group_name: data-engineers
+        level: CAN_VIEW

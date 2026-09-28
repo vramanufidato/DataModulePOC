@@ -1,0 +1,29 @@
+resources:
+  pipelines:
+    poc_medallion_dlt:
+      name: poc-medallion-dlt-${bundle.target}
+      catalog: ${var.catalog}
+      target: ${var.silver_schema}
+      development: false
+      continuous: false
+      channel: PREVIEW
+      photon: true
+      edition: ADVANCED
+      serverless: true
+      libraries:
+        - notebook:
+            path: ../src/dlt_orders.py
+        - notebook:
+            path: ../src/dlt_customers.py
+        - notebook:
+            path: ../src/dlt_products.py
+      configuration:
+        landing.path: ${var.landing_path}
+        bronze.schema: ${var.bronze_schema}
+        gold.schema: ${var.gold_schema}
+        pipeline.alert_email: ${var.alert_email}
+      permissions:
+        - group_name: data-engineers
+          level: CAN_VIEW
+        - group_name: data-analysts
+          level: CAN_VIEW

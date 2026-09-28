@@ -1,0 +1,41 @@
+# ─── GCP Prod Environment ────────────────────────────
+project_id  = "poc-data-platform-prod"
+region      = "us-central1"
+zone        = "us-central1-a"
+environment = "prod"
+
+# Storage
+bronze_bucket_name = "poc-data-platform-prod-bronze"
+temp_bucket_name   = "poc-data-platform-prod-temp"
+bronze_retention_days = 365
+
+# Compute
+dataproc_worker_count    = 8
+dataproc_machine_type    = "n1-highmem-8"
+dataproc_max_idle_minutes = 5
+
+# BigQuery
+bq_silver_dataset = "silver"
+bq_gold_dataset   = "gold"
+bq_location       = "US"
+bq_reservation_slots = 500   # Flat-rate for prod
+
+# Networking
+enable_private_endpoints = true
+vpc_name = "poc-vpc-prod"
+
+# Governance
+enable_dataplex   = true
+enable_policy_tags = true
+pii_taxonomy_id   = "1234567890"
+
+# Backup
+enable_cmek       = true
+kms_keyring_name  = "poc-kms-prod"
+
+labels = {
+  environment = "prod"
+  owner       = "data-platform-team"
+  cost_center = "analytics"
+  compliance  = "soc2"
+}

@@ -1,0 +1,5 @@
+{
+  "gcp_project_id": "poc-data-platform",
+  "gcp_region": "us-central1",
+  "alert_email": "data-alerts@company.com"
+}
